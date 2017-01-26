@@ -89,27 +89,15 @@ class EmbedService implements EmbedServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getRenderer(DataInterface $embed) {
-    return $this->rendererManager->getInstance(['embed' => $embed]);
-    // return $this->rendererFactory->getRenderer($embed);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function render(DataInterface $embed) {
-    return $this->getRenderer($embed)->render($embed);
+  public function getRenderer($url) {
+    return $this->rendererManager->getInstance(['url' => $url]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function renderUrl($url) {
-    if ($embed = $this->getEmbed($url)) {
-      return $this->render($embed);
-    }
-
-    return [];
+    return $this->getRenderer($url)->render();
   }
 
 }

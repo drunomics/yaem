@@ -3,6 +3,7 @@
 namespace Drupal\yaem\Service;
 
 use Drupal\Core\Config\ConfigFactory;
+use Drupal\yaem\Plugin\Renderer\RendererInterface;
 use Embed\DataInterface;
 
 /**
@@ -47,7 +48,7 @@ interface EmbedServiceInterface {
    * @throws \InvalidArgumentException
    *   If any config argument is not valid.
    *
-   * @return NULL|\Embed\DataInterface
+   * @return NULL|DataInterface
    *   The interface.
    */
   public function getEmbed($request);
@@ -55,21 +56,13 @@ interface EmbedServiceInterface {
   /**
    * Gets a renderer for the datainterface.
    *
+   * @param string $url
+   *   The url.
+   *
    * @return RendererInterface
    *   The renderer.
    */
-  public function getRenderer(DataInterface $embed);
-
-  /**
-   * Renders the given data interface.
-   *
-   * @param DataInterface $embed
-   *   The data interface.
-   *
-   * @return array
-   *   A drupal render array.
-   */
-  public function render(DataInterface $embed);
+  public function getRenderer($url);
 
   /**
    * Renders a given url.

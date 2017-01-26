@@ -1,0 +1,6 @@
+name: Yaem: Twitter
+description: Twitter Plugin for Yaem.
+type: module
+core: 8.x
+dependencies:
+  - yaem

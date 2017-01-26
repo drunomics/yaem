@@ -2,23 +2,18 @@
 
 namespace Drupal\yaem\Plugin\Renderer;
 
-use Embed\DataInterface;
-
 /**
  * A renderer.
  */
 interface RendererInterface {
 
   /**
-   * Gets an render array for the given url.
-   *
-   * @param DataInterface $embed
-   *   The data interface.
+   * Gets an render array.
    *
    * @return array
    *   The render array.
    */
-  public function render(DataInterface $embed);
+  public function render();
 
   /**
    * Gets the library keys for the renderer.
@@ -41,12 +36,12 @@ interface RendererInterface {
   /**
    * Whether the plugin is interested in rendering the given data.
    *
-   * @param DataInterface $embed
-   *   The data interface.
+   * @param string $url
+   *   The url.
    *
    * @return bool
    *   TRUE if this plugin has an interest in rendering the data.
    */
-  public static function hasRenderingInterest(DataInterface $embed);
+  public static function hasRenderingInterest($url);
 
 }

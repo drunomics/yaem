@@ -5,7 +5,7 @@ twitter:
   dependencies:
     - core/drupal
     - core/jquery
-    - yaem/twitter.twttr.widgets
+    - yaem_twitter/twitter.twttr.widgets
 
 twitter.twttr.widgets:
   remote: //platform.twitter.com/widgets.js

@@ -3,8 +3,6 @@
 namespace Drupal\yaem_examples\Plugin\Renderer;
 
 use Drupal\yaem\Plugin\Renderer\RendererBase;
-use Drupal\yaem\Plugin\Renderer\TwitterRenderer;
-use Embed\DataInterface;
 
 /**
  * {@inheritdoc}
@@ -12,13 +10,13 @@ use Embed\DataInterface;
  * @YaemRenderer(
  *   id = "yaem_examples_tweet",
  *   label = @Translation("Renders a twitter tweet."),
- *   weight = -10,
+ *   weight = 1,
  * )
  */
 class AlternativeTweetRenderer extends RendererBase {
 
-  protected static $libraries = [
-    'yaem_examples/twitter',
+  protected static $urlPattern = [
+    'twitter\.com\/(?<user>[a-z0-9_-]+)\/(status(es){0,1})\/(?<id>[\d]+)',
   ];
 
   protected static $theme = [
@@ -30,26 +28,16 @@ class AlternativeTweetRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render(DataInterface $embed) {
+  public function render() {
     return array(
       '#theme' => 'yaem_examples_alternative_tweet',
-      '#path' => $embed->getUrl(),
+      '#path' => $this->url,
       '#attributes' => [
         'class' => ['twitter-tweet', 'element-hidden'],
         'data-conversation' => 'none',
         'lang' => 'en',
       ],
-      '#attached' => [
-        'library' => $this->getLibraries(),
-      ],
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function hasRenderingInterest(DataInterface $embed) {
-    return TwitterRenderer::hasRenderingInterest($embed);
   }
 
 }

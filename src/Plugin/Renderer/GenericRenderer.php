@@ -1,7 +1,6 @@
 <?php
 
 namespace Drupal\yaem\Plugin\Renderer;
-use Embed\DataInterface;
 
 /**
  * The generic renderer renders the content directly as an inline template.
@@ -19,7 +18,8 @@ class GenericRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public static function hasRenderingInterest(DataInterface $embed) {
+  public static function hasRenderingInterest($url) {
+    // Fallback for all urls.
     return TRUE;
   }
 

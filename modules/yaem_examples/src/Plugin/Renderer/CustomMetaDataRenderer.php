@@ -3,7 +3,6 @@
 namespace Drupal\yaem_examples\Plugin\Renderer;
 
 use Drupal\yaem\Plugin\Renderer\RendererBase;
-use Embed\DataInterface;
 
 /**
  * {@inheritdoc}
@@ -11,6 +10,7 @@ use Embed\DataInterface;
  * @YaemRenderer(
  *   id = "yaem_examples_metadata",
  *   label = @Translation("Renders metadata fetched from a homepage."),
+ *   weight = 1,
  * )
  */
 class CustomMetaDataRenderer extends RendererBase {
@@ -24,10 +24,10 @@ class CustomMetaDataRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render(DataInterface $embed) {
+  public function renderUrl($url) {
     return array(
       '#theme' => 'yaem_examples_custom_metadata',
-      '#path' => $embed->getUrl(),
+      '#path' => $url,
     );
   }
 

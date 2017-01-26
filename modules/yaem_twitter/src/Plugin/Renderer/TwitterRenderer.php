@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\yaem\Plugin\Renderer;
+namespace Drupal\yaem_twitter\Plugin\Renderer;
 
-use Embed\DataInterface;
+use Drupal\yaem\Plugin\Renderer\RendererBase;
 
 /**
  * {@inheritdoc}
@@ -10,18 +10,21 @@ use Embed\DataInterface;
  * @YaemRenderer(
  *   id = "yaem_twitter",
  *   label = @Translation("Renders a twitter tweet."),
- *   weight = 1,
- *   templatePath = "templates/twitter",
+ *   weight = 10,
  * )
  */
 class TwitterRenderer extends RendererBase {
 
+  protected static $urlPattern = [
+    'twitter\.com\/(?<user>[a-z0-9_-]+)\/(status(es){0,1})\/(?<id>[\d]+)',
+  ];
+
   protected static $libraries = [
-    'yaem/twitter',
+    'yaem_twitter/twitter',
   ];
 
   protected static $theme = [
-    'yaem_tweet' => [
+    'yaem_twitter_tweet' => [
       'variables' => ['path' => NULL, 'attributes' => []],
     ],
   ];
@@ -29,10 +32,10 @@ class TwitterRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render(DataInterface $embed) {
+  public function render() {
     return array(
-      '#theme' => 'yaem_tweet',
-      '#path' => $embed->getUrl(),
+      '#theme' => 'yaem_twitter_tweet',
+      '#path' => $this->url,
       '#attributes' => [
         'class' => ['twitter-tweet', 'element-hidden'],
         'data-conversation' => 'none',
@@ -42,13 +45,6 @@ class TwitterRenderer extends RendererBase {
         'library' => $this->getLibraries(),
       ],
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function hasRenderingInterest(DataInterface $embed) {
-    return preg_match('@((http|https):){0,1}//(www\.){0,1}twitter\.com/(?<user>[a-z0-9_-]+)/(status(es){0,1})/(?<id>[\d]+)@i', $embed->getUrl());
   }
 
 }

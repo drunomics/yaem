@@ -7,7 +7,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\yaem\Annotation\YaemRenderer;
 use Drupal\yaem\Plugin\Renderer\RendererInterface;
-use Embed\DataInterface;
 
 /**
  * Class RendererPluginManager.
@@ -37,24 +36,31 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
   public function getInstance(array $options) {
     $plugin_id = NULL;
 
-    /** @var DataInterface $embed */
-    $embed = $options['embed'];
+    /** @var string $url */
+    $url = $options['url'];
 
-    if ($embed instanceof DataInterface) {
-      $interests = [];
+    $definitions = $this->getDefinitions();
+    uasort($definitions, function($a, $b) {
+      $a_weight = isset($a['weight']) ? $a['weight'] : 0;
+      $b_weight = isset($b['weight']) ? $b['weight'] : 0;
 
-      foreach ($this->getDefinitions() as $definition) {
-        /** @var RendererInterface $class */
-        $class = $definition['class'];
+      if ($a_weight == $b_weight) {
+        return 0;
+      }
+      return ($a_weight > $b_weight) ? -1 : 1;
+    });
 
-        if ($class::hasRenderingInterest($embed)) {
-          $weight = isset($definition['weight']) ? $definition['weight'] : 0;
-          $interests[$weight] = $definition['id'];
-        }
+    foreach ($definitions as $definition) {
+      /** @var RendererInterface $class */
+      $class = $definition['class'];
+
+      if (!is_callable([$class, 'hasRenderingInterest'])) {
+        continue;
       }
 
-      if (!empty($interests)) {
-        $plugin_id = $interests[max(array_keys($interests))];
+      if ($class::hasRenderingInterest($url)) {
+        $plugin_id = $definition['id'];
+        break;
       }
     }
 
@@ -66,7 +72,7 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
     }
 
     if (empty($this->instances[$plugin_id])) {
-      $this->instances[$plugin_id] = $this->createInstance($plugin_id);
+      $this->instances[$plugin_id] = $this->createInstance($plugin_id, ['url' => $url]);
     }
 
     return $this->instances[$plugin_id];
@@ -81,6 +87,11 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
     foreach ($this->getDefinitions() as $id => $definition) {
       /** @var RendererInterface $class */
       $class = $definition['class'];
+
+      if (!is_callable([$class, 'getTheme'])) {
+        continue;
+      }
+
       $plugin_info = $class::getTheme();
 
       foreach ($plugin_info as $theme => $theme_info) {
