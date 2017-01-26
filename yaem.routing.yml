@@ -1,0 +1,7 @@
+yaem.settings:
+  path: '/admin/config/content/yaem'
+  defaults:
+    _form: '\Drupal\yaem\Form\EmbedSettingsForm'
+    _title: 'Yaem settings'
+  requirements:
+    _permission: 'administer yaem settings'

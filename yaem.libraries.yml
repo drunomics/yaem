@@ -1,0 +1,19 @@
+twitter:
+  version: VERSION
+  js:
+    'js/twitter.js': {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - yaem/twitter.twttr.widgets
+
+twitter.twttr.widgets:
+  remote: //platform.twitter.com/widgets.js
+  license:
+    name: UNKNOWN
+    url: UNKNOWN
+    gpl-compatible: FALSE
+  js:
+    //platform.twitter.com/widgets.js:
+      type: external
+      minified: true

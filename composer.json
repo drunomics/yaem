@@ -1,0 +1,8 @@
+{
+  "name": "drupal/yaem",
+  "description": "Yet another embed module.",
+  "require": {
+    "php": ">=5.3",
+    "embed/embed": "^3.0"
+  }
+}

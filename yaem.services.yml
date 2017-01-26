@@ -1,0 +1,11 @@
+services:
+  plugin.manager.yaem_renderer:
+    class: Drupal\yaem\Service\RendererPluginManager
+    arguments: ['@container.namespaces', '@module_handler']
+
+  yaem.renderer.factory:
+    class: Drupal\yaem\Service\RendererFactory
+
+  yaem.service.embed:
+    class: Drupal\yaem\Service\EmbedService
+    arguments: ["@config.factory", "@plugin.manager.yaem_renderer"]
