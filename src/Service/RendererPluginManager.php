@@ -73,7 +73,7 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
     }
 
     if (empty($this->instances[$plugin_id])) {
-      return $this->createInstance($plugin_id, ['embedService' => $options['embedService']]);
+      $this->instances[$plugin_id] = $this->createInstance($plugin_id, ['embedService' => $options['embedService']]);
     }
 
     return $this->instances[$plugin_id];
