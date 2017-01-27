@@ -40,21 +40,16 @@ interface EmbedServiceInterface {
   /**
    * Gets an embed data interface.
    *
-   * @param string|\Embed\Request $request
-   *   The url or a request with the url.
-   *
-   * @throws \Embed\Exceptions\InvalidUrlException
-   *   If the urls is not valid.
-   * @throws \InvalidArgumentException
-   *   If any config argument is not valid.
+   * @param string $url
+   *   The url.
    *
    * @return NULL|DataInterface
    *   The interface.
    */
-  public function getEmbed($request);
+  public function getEmbed($url);
 
   /**
-   * Gets a renderer for the datainterface.
+   * Gets the renderer plugin for the url.
    *
    * @param string $url
    *   The url.

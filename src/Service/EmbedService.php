@@ -28,6 +28,13 @@ class EmbedService implements EmbedServiceInterface {
   protected $rendererManager;
 
   /**
+   * Embed objects.
+   *
+   * @var array|DataInterface[]
+   */
+  protected $embeds = [];
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ConfigFactory $configFactory, RendererPluginManagerInterface $rendererManager) {
@@ -73,15 +80,23 @@ class EmbedService implements EmbedServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getEmbed($request) {
+  public function getEmbed($url) {
+    $key = md5($url);
+
+    if (isset($this->embeds[$key])) {
+      return $this->embeds[$key];
+    }
+
     $embed = NULL;
 
     try {
-      $embed = Embed::create($request, $this->config);
+      $embed = Embed::create($url, $this->config);
     }
     catch (\Exception $e) {
       watchdog_exception(YAEM, $e);
     }
+
+    $this->embeds[$key] = $embed;
 
     return $embed;
   }
@@ -90,14 +105,14 @@ class EmbedService implements EmbedServiceInterface {
    * {@inheritdoc}
    */
   public function getRenderer($url) {
-    return $this->rendererManager->getInstance(['url' => $url]);
+    return $this->rendererManager->getInstance(['url' => $url, 'embedService' => $this]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function renderUrl($url) {
-    return $this->getRenderer($url)->render();
+    return $this->getRenderer($url)->render($url);
   }
 
 }

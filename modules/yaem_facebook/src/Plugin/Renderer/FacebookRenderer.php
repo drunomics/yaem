@@ -10,7 +10,7 @@ use Embed\DataInterface;
  *
  * @YaemRenderer(
  *   id = "yaem_facebook",
- *   label = @Translation("Renders a facebook post."),
+ *   label = @Translation("Facebook"),
  *   weight = 10,
  * )
  */
@@ -19,15 +19,5 @@ class FacebookRenderer extends RendererBase {
   protected static $urlPattern = [
     'facebook\.com',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  public function renderEmbed(DataInterface $embed) {
-    return [
-      '#type' => 'inline_template',
-      '#template' => $embed->getCode(),
-    ];
-  }
 
 }

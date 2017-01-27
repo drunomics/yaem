@@ -19,30 +19,20 @@ abstract class RendererBase extends PluginBase implements RendererInterface {
   protected $embedService;
 
   /**
-   * The url to embed.
-   *
-   * @var string
-   */
-  protected $url;
-
-  /**
    * RendererBase constructor.
    *
    * @param array $configuration
+   *   Config containing:
+   *    - embedService: EmbedServiceInterface.
    * @param string $plugin_id
+   *   The plugin id.
    * @param mixed $plugin_definition
+   *   Plugin definistions.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition) {
-    /** @var EmbedServiceInterface $embedService */
-    $this->embedService = \Drupal::service(YAEM_EMBED_SERVICE);
-    $this->url = $configuration['url'];
+    $this->embedService = $configuration['embedService'];
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
-
-  /**
-   * @var DataInterface|NULL
-   */
-  protected $embed;
 
   /**
    * The libraries the plugin uses.
@@ -66,14 +56,13 @@ abstract class RendererBase extends PluginBase implements RendererInterface {
   protected static $urlPattern = [];
 
   /**
+   * Gets the embed for the urls.
+   *
    * @return DataInterface|NULL
+   *   The embed datainterface or NULL.
    */
-  protected function getEmbed() {
-    if (!isset($this->embed)) {
-      $this->embed = $this->embedService->getEmbed($this->url);
-    }
-
-    return $this->embed;
+  protected function getEmbed($url) {
+    return $this->embedService->getEmbed($url);
   }
 
   /**
@@ -89,8 +78,8 @@ abstract class RendererBase extends PluginBase implements RendererInterface {
   /**
    * {@inheritdoc}
    */
-  public function render() {
-    if ($embed = $this->getEmbed()) {
+  public function render($url) {
+    if ($embed = $this->getEmbed($url)) {
       return $this->renderEmbed($embed);
     }
 

@@ -10,10 +10,13 @@ interface RendererInterface {
   /**
    * Gets an render array.
    *
+   * @param string $url
+   *   The url.
+   *
    * @return array
    *   The render array.
    */
-  public function render();
+  public function render($url);
 
   /**
    * Gets the library keys for the renderer.

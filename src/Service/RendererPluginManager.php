@@ -54,13 +54,14 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
       /** @var RendererInterface $class */
       $class = $definition['class'];
 
-      if (!is_callable([$class, 'hasRenderingInterest'])) {
-        continue;
+      try {
+        if ($class::hasRenderingInterest($url)) {
+          $plugin_id = $definition['id'];
+          break;
+        }
       }
-
-      if ($class::hasRenderingInterest($url)) {
-        $plugin_id = $definition['id'];
-        break;
+      catch (\Error $e) {
+        \Drupal::logger(YAEM)->error($e->getMessage());
       }
     }
 
@@ -72,7 +73,7 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
     }
 
     if (empty($this->instances[$plugin_id])) {
-      $this->instances[$plugin_id] = $this->createInstance($plugin_id, ['url' => $url]);
+      return $this->createInstance($plugin_id, ['embedService' => $options['embedService']]);
     }
 
     return $this->instances[$plugin_id];
@@ -88,11 +89,13 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
       /** @var RendererInterface $class */
       $class = $definition['class'];
 
-      if (!is_callable([$class, 'getTheme'])) {
+      try {
+        $plugin_info = $class::getTheme();
+      }
+      catch (\Error $e) {
+        \Drupal::logger(YAEM)->error($e->getMessage());
         continue;
       }
-
-      $plugin_info = $class::getTheme();
 
       foreach ($plugin_info as $theme => $theme_info) {
         if (!isset($theme_info['path'])) {

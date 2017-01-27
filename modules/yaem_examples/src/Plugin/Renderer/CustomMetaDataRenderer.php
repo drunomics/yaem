@@ -9,7 +9,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  *
  * @YaemRenderer(
  *   id = "yaem_examples_metadata",
- *   label = @Translation("Renders metadata fetched from a homepage."),
+ *   label = @Translation("Example Metadata"),
  *   weight = 1,
  * )
  */
@@ -24,7 +24,8 @@ class CustomMetaDataRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function renderUrl($url) {
+  public function render($url) {
+    $embed = $this->getEmbed($url);
     return array(
       '#theme' => 'yaem_examples_custom_metadata',
       '#path' => $url,

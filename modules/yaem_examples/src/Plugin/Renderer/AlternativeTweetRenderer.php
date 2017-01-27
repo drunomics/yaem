@@ -9,7 +9,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  *
  * @YaemRenderer(
  *   id = "yaem_examples_tweet",
- *   label = @Translation("Renders a twitter tweet."),
+ *   label = @Translation("Example Twitter"),
  *   weight = 1,
  * )
  */
@@ -28,10 +28,10 @@ class AlternativeTweetRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render() {
+  public function render($url) {
     return array(
       '#theme' => 'yaem_examples_alternative_tweet',
-      '#path' => $this->url,
+      '#path' => $url,
       '#attributes' => [
         'class' => ['twitter-tweet', 'element-hidden'],
         'data-conversation' => 'none',

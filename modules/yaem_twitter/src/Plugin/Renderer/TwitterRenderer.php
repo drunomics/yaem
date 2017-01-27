@@ -9,7 +9,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  *
  * @YaemRenderer(
  *   id = "yaem_twitter",
- *   label = @Translation("Renders a twitter tweet."),
+ *   label = @Translation("Twitter"),
  *   weight = 10,
  * )
  */
@@ -32,10 +32,10 @@ class TwitterRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render() {
+  public function render($url) {
     return array(
       '#theme' => 'yaem_twitter_tweet',
-      '#path' => $this->url,
+      '#path' => $url,
       '#attributes' => [
         'class' => ['twitter-tweet', 'element-hidden'],
         'data-conversation' => 'none',

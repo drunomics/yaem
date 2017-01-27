@@ -9,7 +9,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  *
  * @YaemRenderer(
  *   id = "yaem_youtube",
- *   label = @Translation("Renders youtube videos."),
+ *   label = @Translation("Youtube"),
  *   weight = 10,
  * )
  */
@@ -28,12 +28,12 @@ class YoutubeRenderer extends RendererBase {
   /**
    * {@inheritdoc}
    */
-  public function render() {
-    $url = $this->getEmbedUrl();
+  public function render($url) {
+    $url = $this->getEmbedUrl($url);
 
     if (!$url) {
       // Couldn't generate url, use embed as fallback.
-      return parent::render();
+      return parent::render($url);
     }
 
     return array(
@@ -48,9 +48,9 @@ class YoutubeRenderer extends RendererBase {
    * @return bool|string
    *    The embed url.
    */
-  private function getEmbedUrl() {
-    if (preg_match('/v=([\w_-]+)/', $this->url, $m)) {
-      return "https://www.youtube.com/embed/" . $m[1] . "?feature=oembed";
+  private function getEmbedUrl($url) {
+    if (preg_match('/v=([\w_-]+)/', $url, $m)) {
+      return "https://www.youtube.com/embed/" . $m[1];
     }
 
     return FALSE;
