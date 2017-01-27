@@ -1,7 +1,7 @@
 twitter:
   version: VERSION
   js:
-    'js/twitter.js': {}
+    'js/yaem_twitter.js': {}
   dependencies:
     - core/drupal
     - core/jquery
