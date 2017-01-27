@@ -1,12 +1,12 @@
-### Yet another embed module
+## Yet another embed module
 
-##### Purpose
+#### Purpose
 
 Provide a plugin system which allows embedding urls either with the 
-use of oscaroteros [https://github.com/oscarotero/Embed](embed/embed) library 
+use of oscaroteros [embed/embed](https://github.com/oscarotero/Embed) library 
 or by implementing customized rendering strategies.
 
-##### How it works
+#### How it works
 
 Using the yaem embed service, one can request a render array for any url. 
 
@@ -23,14 +23,14 @@ to fetch additional data for the url or use the embed code from the page.
 If no applicable plugin is found the generic renderer will return the embed
 code from the page.
 
-##### Usage
+#### Usage
 
-###### field formatter
+##### field formatter
 
 For fields of type `link` the field formatter `Yaem embed` can be selected, which
 will try to render the given url with the appropiate plugin.
 
-###### embed service
+##### embed service
 
 Inject the service into your Controller, Service, etc.
 
