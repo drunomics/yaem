@@ -3,7 +3,6 @@
 namespace Drupal\yaem_facebook\Plugin\Renderer;
 
 use Drupal\yaem\Plugin\Renderer\RendererBase;
-use Embed\DataInterface;
 
 /**
  * {@inheritdoc}
@@ -17,7 +16,7 @@ use Embed\DataInterface;
 class FacebookRenderer extends RendererBase {
 
   protected static $urlPattern = [
-    'facebook\.com',
+    '/facebook\.com/',
   ];
 
 }

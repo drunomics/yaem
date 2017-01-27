@@ -104,9 +104,10 @@ abstract class RendererBase extends PluginBase implements RendererInterface {
    * {@inheritdoc}
    */
   public static function hasRenderingInterest($url) {
-    if (!empty(static::$urlPattern)) {
-      $pattern = '/' . implode("|", static::$urlPattern) . '/';
-      return preg_match($pattern, $url);
+    foreach (static::$urlPattern as $pattern) {
+      if (preg_match($pattern, $url)) {
+        return TRUE;
+      };
     }
 
     return FALSE;

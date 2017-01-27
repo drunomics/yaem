@@ -16,7 +16,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
 class YoutubeRenderer extends RendererBase {
 
   protected static $urlPattern = [
-    'youtube\.com',
+    '/youtube\.com/',
   ];
 
   protected static $theme = [
