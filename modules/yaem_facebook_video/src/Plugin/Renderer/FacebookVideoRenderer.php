@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\yaem_youtube\Plugin\Renderer;
+namespace Drupal\yaem_facebook_video\Plugin\Renderer;
 
 use Drupal\yaem\Plugin\Renderer\RendererBase;
 
@@ -8,17 +8,15 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  * {@inheritdoc}
  *
  * @YaemRenderer(
- *   id = "yaem_youtube",
- *   label = @Translation("Youtube"),
- *   weight = 10,
+ *   id = "yaem_facebook_video",
+ *   label = @Translation("Facebook Video"),
+ *   weight = 11,
  * )
  */
-class YoutubeRenderer extends RendererBase {
+class FacebookVideoRenderer extends RendererBase {
 
   protected static $urlPattern = [
-    '@youtube\.com/(watch)?\?v=(?<id>[^\&\?/]+)@',
-    '@youtube\.com/(embed|v)/(?<id>[^\&\?/]+)@',
-    '@youtu\.be/(?<id>[^\&\?/]+)@',
+    '@facebook.com/([\w-]*/videos/|video\.php\?v\=)(?<id>[0-9]*)/?@',
   ];
 
   /**
@@ -33,9 +31,9 @@ class YoutubeRenderer extends RendererBase {
       '#attributes' => [
         'frameborder' => '0',
         'allowfullscreen' => 'allowfullscreen',
-        'src' => sprintf('https://www.youtube.com/embed/%s', $matches['id']),
+        'src' => sprintf('https://www.facebook.com/video/embed?video_id=%s', $matches['id']),
         'width' => '480',
-        'height' => '270',
+        'height' => '480',
       ],
     ];
   }

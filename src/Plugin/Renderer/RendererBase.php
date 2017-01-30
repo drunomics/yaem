@@ -104,13 +104,27 @@ abstract class RendererBase extends PluginBase implements RendererInterface {
    * {@inheritdoc}
    */
   public static function hasRenderingInterest($url) {
+    $matches = static::getFirstMatch($url);
+    return !empty($matches);
+  }
+
+  /**
+   * Gets the first match from the urlPattern property for the given url.
+   *
+   * @param string $url
+   *   The url.
+   *
+   * @return null|array
+   *   The match array.
+   */
+  protected static function getFirstMatch($url) {
     foreach (static::$urlPattern as $pattern) {
-      if (preg_match($pattern, $url)) {
-        return TRUE;
+      if (preg_match($pattern, $url, $m)) {
+        return $m;
       };
     }
 
-    return FALSE;
+    return NULL;
   }
 
 }

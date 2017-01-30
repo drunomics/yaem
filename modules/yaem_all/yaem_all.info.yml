@@ -5,5 +5,7 @@ core: 8.x
 dependencies:
   - yaem
   - yaem_facebook
+  - yaem_facebook_video
+  - yaem_instagram
   - yaem_twitter
   - yaem_youtube

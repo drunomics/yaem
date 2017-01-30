@@ -16,7 +16,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
 class TwitterRenderer extends RendererBase {
 
   protected static $urlPattern = [
-    '/twitter\.com\/(?<user>[a-z0-9_-]+)\/(status(es){0,1})\/(?<id>[\d]+)/',
+    '@twitter\.com/(?<user>[a-z0-9_-]+)/(status(es){0,1})/(?<id>[\d]+)@i',
   ];
 
   protected static $libraries = [
@@ -33,7 +33,7 @@ class TwitterRenderer extends RendererBase {
    * {@inheritdoc}
    */
   public function render($url) {
-    return array(
+    return [
       '#theme' => 'yaem_twitter_tweet',
       '#path' => $url,
       '#attributes' => [
@@ -44,7 +44,7 @@ class TwitterRenderer extends RendererBase {
       '#attached' => [
         'library' => $this->getLibraries(),
       ],
-    );
+    ];
   }
 
 }
