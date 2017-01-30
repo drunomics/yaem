@@ -10,7 +10,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
  * @YaemRenderer(
  *   id = "yaem_facebook_video",
  *   label = @Translation("Facebook Video"),
- *   weight = 11,
+ *   weight = 20,
  * )
  */
 class FacebookVideoRenderer extends RendererBase {
