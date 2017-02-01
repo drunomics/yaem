@@ -16,7 +16,7 @@ use Drupal\yaem\Plugin\Renderer\RendererBase;
 class FacebookVideoRenderer extends RendererBase {
 
   protected static $urlPattern = [
-    '@facebook.com/([\w-]*/videos/|video\.php\?v\=)(?<id>[0-9]*)/?@',
+    '@facebook\.com/([^/]+/videos/(.*[\D].*/)?|video\.php\?v\=)(?<id>[\d]+)/?@',
   ];
 
   /**
