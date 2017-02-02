@@ -3,7 +3,7 @@
 namespace Drupal\yaem\Service;
 
 use Drupal\yaem\Form\EmbedSettingsForm as Settings;
-
+use Drupal\yaem\Yaem;
 use Embed\DataInterface;
 use Embed\Embed;
 use Drupal\Core\Config\ConfigFactory;
@@ -39,7 +39,7 @@ class EmbedService implements EmbedServiceInterface {
    */
   public function __construct(ConfigFactory $configFactory, RendererPluginManagerInterface $rendererManager) {
     $this->rendererManager = $rendererManager;
-    $settings = $configFactory->get(YAEM_SETTINGS);
+    $settings = $configFactory->get(Yaem::YAEM_SETTINGS);
 
     $config = [
       'oembed' => [
@@ -93,7 +93,7 @@ class EmbedService implements EmbedServiceInterface {
       $embed = Embed::create($url, $this->config);
     }
     catch (\Exception $e) {
-      watchdog_exception(YAEM, $e);
+      watchdog_exception(Yaem::YAEM, $e);
     }
 
     $this->embeds[$key] = $embed;

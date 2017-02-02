@@ -7,6 +7,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\yaem\Annotation\YaemRenderer;
 use Drupal\yaem\Plugin\Renderer\RendererInterface;
+use Drupal\yaem\Yaem;
 
 /**
  * Class RendererPluginManager.
@@ -61,7 +62,7 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
         }
       }
       catch (\Error $e) {
-        \Drupal::logger(YAEM)->error($e->getMessage());
+        \Drupal::logger(Yaem::YAEM)->error($e->getMessage());
       }
     }
 
@@ -93,7 +94,7 @@ class RendererPluginManager extends DefaultPluginManager implements RendererPlug
         $plugin_info = $class::getTheme();
       }
       catch (\Error $e) {
-        \Drupal::logger(YAEM)->error($e->getMessage());
+        \Drupal::logger(Yaem::YAEM)->error($e->getMessage());
         continue;
       }
 

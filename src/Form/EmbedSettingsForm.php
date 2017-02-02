@@ -4,6 +4,7 @@ namespace Drupal\yaem\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\yaem\Yaem;
 
 /**
  * General configuration for the liveblog embeds.
@@ -21,7 +22,7 @@ class EmbedSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return YAEM;
+    return Yaem::YAEM;
   }
 
   /**
@@ -29,7 +30,7 @@ class EmbedSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      YAEM_SETTINGS,
+      Yaem::YAEM_SETTINGS,
     ];
   }
 
@@ -37,7 +38,7 @@ class EmbedSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(YAEM_SETTINGS);
+    $config = $this->config(Yaem::YAEM_SETTINGS);
 
     $form[self::OEMBED_EMBEDLY_KEY] = array(
       '#type' => 'textfield',
@@ -67,7 +68,7 @@ class EmbedSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config(YAEM_SETTINGS)
+    $this->config(Yaem::YAEM_SETTINGS)
       ->set(self::OEMBED_EMBEDLY_KEY, $form_state->getValue(self::OEMBED_EMBEDLY_KEY))
       ->set(self::OEMBED_IFRAMELY_KEY, $form_state->getValue(self::OEMBED_IFRAMELY_KEY))
       ->set(self::GOOGLE_KEY, $form_state->getValue(self::GOOGLE_KEY))

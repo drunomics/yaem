@@ -36,11 +36,11 @@ Inject the service into your Controller, Service, etc.
 
    `@yaem.service.embed`
    
-   `$container->get(YAEM_EMBED_SERVICE)`
+   `$container->get(\Drupal\yaem\Yaem::YAEM_EMBED_SERVICE)`
 
 or directly
 
-   `$embedService = \Drupal::get(YAEM_EMBED_SERVICE)`
+   `$embedService = \Drupal::get(\Drupal\yaem\Yaem::YAEM_EMBED_SERVICE)`
     
 Get the drupal render array for the url:
 

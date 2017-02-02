@@ -5,32 +5,13 @@
  */
 
 use Drupal\yaem\Service\RendererPluginManagerInterface;
-
-/**
- * Module id.
- */
-const YAEM = 'yaem';
-
-/**
- * Settings id.
- */
-const YAEM_SETTINGS = 'yaem.settings';
-
-/**
- * Service id.
- */
-const YAEM_EMBED_SERVICE = 'yaem.service.embed';
-
-/**
- * Plugin manager id.
- */
-const YAEM_PLUGIN_MANAGER = 'plugin.manager.yaem_renderer';
+use Drupal\yaem\Yaem;
 
 /**
  * Implements hook_theme().
  */
 function yaem_theme() {
   /** @var RendererPluginManagerInterface $pluginManager */
-  $pluginManager = \Drupal::service(YAEM_PLUGIN_MANAGER);
+  $pluginManager = \Drupal::service(Yaem::YAEM_PLUGIN_MANAGER);
   return $pluginManager->getThemeHookInfo();
 }

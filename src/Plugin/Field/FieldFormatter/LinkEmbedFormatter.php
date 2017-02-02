@@ -5,7 +5,7 @@ namespace Drupal\yaem\Plugin\Field\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\yaem\Service\EmbedServiceInterface;
-
+use Drupal\yaem\Yaem;
 /**
  * Plugin implementation of the 'yaem_link' formatter.
  *
@@ -24,7 +24,7 @@ class LinkEmbedFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     /** @var EmbedServiceInterface $embedService */
-    $embedService = \Drupal::service(YAEM_EMBED_SERVICE);
+    $embedService = \Drupal::service(Yaem::YAEM_EMBED_SERVICE);
 
     $element = array();
 
