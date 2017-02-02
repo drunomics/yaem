@@ -13,9 +13,9 @@ class EmbedSettingsForm extends ConfigFormBase {
   /**
    * Config names.
    */
-  const OEMBED_EMBEDLY_KEY  = 'oembed.embedly_key';
-  const OEMBED_IFRAMELY_KEY = 'oembed.iframely_key';
-  const GOOGLE_KEY          = 'google.key';
+  const OEMBED_EMBEDLY_KEY  = 'oembed_embedly_key';
+  const OEMBED_IFRAMELY_KEY = 'oembed_iframely_key';
+  const GOOGLE_KEY          = 'google_key';
 
   /**
    * {@inheritdoc}
